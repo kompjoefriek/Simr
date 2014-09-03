@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<simr>
+    <tasks>
+        <task>
+            <command><![CDATA[echo "Hello, World!"]]></command>
+            <input>
+                <!-- optional, for example when certain input parameters are needed for the command that need to be escaped? -->
+                <parameter name="key" value="value" />
+            </input>
+            <output>
+                <!-- optional redirect for output: log, stdout, etc. -->
+                <redirect target="stdout" />
+            </output>
+        </task>
+        <task>
+            <command><![CDATA[echo "Hello, World! 2"]]></command>
+        </task>
+    </tasks>
+</simr>
