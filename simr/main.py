@@ -9,6 +9,10 @@ from pprint import pprint
 def main():
     # Parse console input
     config = Config('../config/simr.xml')
+
+    variables = config.get_variables()
+    pprint(variables)
+
     tasks = config.get_tasks()
     pprint(tasks)
 

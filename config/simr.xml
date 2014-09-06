@@ -1,5 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <simr>
+    <variables>
+        <!-- Example of a configuration -->
+        <variable name="SDK_CLASSPATH" value="C:\My\Folder\Client_v%SDK_VERSION%.jar;C:\My\Folder\Server_v%SDK_VERSION%.jar" />
+        <!-- Please note the "wrong" order there are defined in. I'd like to make it work even like this. -->
+        <variable name="SDK_VERSION" value="1.2.3" />
+    </variables>
     <tasks>
         <task>
             <command><![CDATA[echo "Hello, World!"]]></command>
@@ -15,5 +21,16 @@
         <task>
             <command><![CDATA[echo "Hello, World! 2"]]></command>
         </task>
+
+        <!-- Example of a java task -->
+        <task name="My First Simulation"> <!-- optional name? Could be used to print when starting the task (or for logging) -->
+            <command><![CDATA[java -cp "Test.jar;lib/*" my.package.MainClass]]></command>
+        </task>
+
+        <!-- Example of a task using variables -->
+        <task name="My Second Simulation">
+            <command><![CDATA[java -cp "%SDK_CLASSPATH%" my.package.MainClass]]></command>
+        </task>
+
     </tasks>
 </simr>

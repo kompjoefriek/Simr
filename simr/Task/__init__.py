@@ -1,1 +1,1 @@
-__author__ = 'development'
+__author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
