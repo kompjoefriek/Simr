@@ -10,21 +10,19 @@ class Variable:
     depends_name = None  # variable name this variable depends on
     depends_ref = None   # reference to all variables that depend on this variable
 
-    def __init__(self, config):
+    def __init__(self, name, value):
         self.depends_name = []
         self.depends_ref = []
-        if "name" in config:
-            if "%" in config["name"]:
-                print("Variable \"%s\" has %% in its name!" % config.name)
-                return
-            else:
-                self.name = config["name"]
-        if "value" in config:
-            self.value = config["value"]
+        if "%" in name:
+            raise RuntimeError("Variable \"{}\" has % in its name!".format(name))
+        else:
+            self.name = name
+
+        self.value = value
 
         if not self.value is None:
             if self.value.count('%') % 2 != 0:
-                print("Variable \"%s\" has an uneven count of %% chars! (counted %d)" % (config.name, self.value.count('%')));
+                raise RuntimeWarning("Variable \"{}\" has an uneven count of % chars! (counted {})".format(self.name, self.value.count('%')))
             else:
                 matches = re.match(r".*%([^%]+)%.*", self.value)
                 if not matches is None:
@@ -39,8 +37,7 @@ class Variable:
 
     def resolve(self, variables, call_chain):
         if self.name in call_chain:
-            print("Cyclic reference detected!")
-            return
+            raise RuntimeError("Cyclic reference detected!")
 
         # add this class to the call chain to prevent it from being called again this loop0
         call_chain.append(self.name)
@@ -63,4 +60,4 @@ class Variable:
             #self.depends_ref.clear()
 
     def __repr__(self):
-        return "Variable {\n  name:\"%s\",\n  value\"%s\",\n  depends_name: %s,\n  refs: [%s]}" % (self.name, self.value, self.depends_name, ",".join([x.name for x in self.depends_ref]))
+        return "Variable {{\n  name:\"{}\",\n  value\"{}\",\n  depends_name: {},\n  refs: [{}]\n}}".format(self.name, self.value, self.depends_name, ",".join([x.name for x in self.depends_ref]))

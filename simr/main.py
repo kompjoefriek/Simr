@@ -2,13 +2,13 @@ __author__ = 'Sander Krause <sanderkrause@gmail.com>'
 
 
 from simr.Simr import Simr
-from simr.Config import Config
+from simr.Configuration.Configuration import Configuration
 from pprint import pprint
 
 
 def main():
     # Parse console input
-    config = Config('../config/simr.xml')
+    config = Configuration('../config/simr.xml')
 
     variables = config.get_variables()
     pprint(variables)
