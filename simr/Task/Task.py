@@ -1,3 +1,6 @@
+"""
+This file contains the class Task, currently not used (Configuration.Task is used instead)
+"""
 __author__ = 'Sander Krause <sanderkrause@gmail.com>'
 
 from subprocess import call

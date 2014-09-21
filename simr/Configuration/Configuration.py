@@ -3,7 +3,11 @@ This file contains the Configuration class, used to encapsulate the XML configur
 """
 __author__ = 'Sander Krause <sanderkrause@gmail.com>'
 
-from lxml import etree
+try:
+    from lxml import etree
+except ImportError:
+    import xml.etree.ElementTree as etree
+
 from simr.Configuration.Variable import Variable
 from simr.Configuration.Task import Task
 
@@ -45,7 +49,8 @@ class Configuration:
             variable.resolve(self.variables, [])
         for variable in self.variables:
             if not variable.depends_name is None and not len(variable.depends_name) == 0:
-                raise RuntimeWarning("Variable \"{}\" could not be resolved! Depends on: {}".format(variable.name, variable.depends_name))
+                raise RuntimeWarning("Variable \"{}\" could not be resolved! Depends on: {}".format(variable.name,
+                                                                                                    variable.depends_name))
 
     def parse_tasks(self):
         """
@@ -56,9 +61,10 @@ class Configuration:
         task_root = self.config.find('tasks')
         if task_root is not None:
             for task_element in task_root.findall('task'):
+
                 task = {
                     "command": task_element.find("command").text,
-                    "parameters": {},
+                    "parameters": [],
                     "output": None,
                     "name": task_element.get("name")
                 }

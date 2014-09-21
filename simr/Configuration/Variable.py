@@ -1,14 +1,17 @@
+"""
+This file contains the class Variable, meant to encapsulate a given variable as configured.
+variables can resolve values with variables in them
+"""
 __author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
 
 import re
 
 
 class Variable:
-
     name = None
     value = None
-    depends_name = None  # variable name this variable depends on
-    depends_ref = None   # reference to all variables that depend on this variable
+    depends_name = []  # variable name this variable depends on
+    depends_ref = []  # reference to all variables that depend on this variable
 
     def __init__(self, name, value):
         self.depends_name = []
@@ -22,7 +25,8 @@ class Variable:
 
         if not self.value is None:
             if self.value.count('%') % 2 != 0:
-                raise RuntimeWarning("Variable \"{}\" has an uneven count of % chars! (counted {})".format(self.name, self.value.count('%')))
+                raise RuntimeWarning("Variable \"{}\" has an uneven count of % chars! (counted {})"
+                                     .format(self.name, self.value.count('%')))
             else:
                 matches = re.match(r".*%([^%]+)%.*", self.value)
                 if not matches is None:
@@ -57,7 +61,8 @@ class Variable:
         if not self.depends_name is None and len(self.depends_name) == 0:
             for reference in self.depends_ref:
                 reference.resolve(variables, call_chain)
-            #self.depends_ref.clear()
+                # self.depends_ref.clear()
 
     def __repr__(self):
-        return "Variable {{\n  name:\"{}\",\n  value\"{}\",\n  depends_name: {},\n  refs: [{}]\n}}".format(self.name, self.value, self.depends_name, ",".join([x.name for x in self.depends_ref]))
+        return "Variable {{\n  name:\"{}\",\n  value\"{}\",\n  depends_name: {},\n  refs: [{}]\n}}" \
+            .format(self.name, self.value, self.depends_name, ",".join([x.name for x in self.depends_ref]))
