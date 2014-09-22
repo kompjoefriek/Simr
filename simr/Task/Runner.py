@@ -4,6 +4,8 @@ This file contains the class Runner, meant to run a given list of tasks
 __author__ = 'Sander Krause <sanderkrause@gmail.com>'
 
 import threading
+import time
+import datetime
 
 
 class Runner:
@@ -28,22 +30,24 @@ class Runner:
         # self.lock.acquire()
         if len(self.queue) > 0:
             task = self.queue.pop(0)
-            print("Starting task: {}".format(task.get_name()))
+            print("Starting task: {}.".format(task.get_name()))
             thread = threading.Thread(target=self.run_in_thread, args=[task])
             thread.start()
             self.running_threads.append(thread)
             # self.lock.release()
 
-    def on_task_finished(self, task):
-        print("Finished task: {}".format(task.get_name()))
+    def on_task_finished(self, task, start_time):
+        print("Finished task: {}. Time: {}".format(task.get_name(),
+                                                   str(datetime.timedelta(seconds=time.time() - start_time))))
         self.start_next_task()
         pass
 
     def run_in_thread(self, task):
+        start_time = time.time()
         try:
             task.run()
         finally:
-            self.on_task_finished(task)
+            self.on_task_finished(task, start_time)
 
     def run(self):
         print("Found {} tasks, running max {} simultaneously.".format(len(self.tasks), self.max_workers))

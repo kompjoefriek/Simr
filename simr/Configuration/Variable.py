@@ -22,16 +22,29 @@ class Variable:
             self.name = name
 
         self.value = value
+        self.depends_name = Variable.get_dependency_list(self.name, self.value)
 
-        if not self.value is None:
-            if self.value.count('%') % 2 != 0:
+    @staticmethod
+    def get_dependency_list(name, value):
+        if not value is None:
+            if value.count('%') % 2 != 0:
                 raise RuntimeWarning("Variable \"{}\" has an uneven count of % chars! (counted {})"
-                                     .format(self.name, self.value.count('%')))
+                                     .format(name, value.count('%')))
             else:
-                matches = re.match(r".*%([^%]+)%.*", self.value)
+                matches = re.findall(r"%([^%]+)%", value)
                 if not matches is None:
                     # remove duplicates and store
-                    self.depends_name = list(set(matches.groups()))
+                    return list(set(matches))
+        return None
+
+    @staticmethod
+    def resolve_value(variables, value, name="(task)"):
+        dependency_list = Variable.get_dependency_list(name, value)
+        for dep_name in dependency_list:
+            for variable in variables:
+                if dep_name == variable.name:
+                    value = value.replace("%{}%".format(variable.name), variable.value)
+        return value
 
     def check_references(self, variables):
         for variable in variables:
@@ -43,7 +56,7 @@ class Variable:
         if self.name in call_chain:
             raise RuntimeError("Cyclic reference detected!")
 
-        # add this class to the call chain to prevent it from being called again this loop0
+        # add this class to the call chain to prevent it from being called again this loop
         call_chain.append(self.name)
 
         # make copy so we can alter the original inside the loop
@@ -52,10 +65,9 @@ class Variable:
         if not self.value is None and not depends_name_copy is None:
             for dep_name in depends_name_copy:
                 for variable in variables:
-                    if dep_name == variable.name:
-                        if len(variable.depends_name) == 0:
-                            self.value = self.value.replace("%{}%".format(variable.name), variable.value)
-                            self.depends_name.remove(dep_name)
+                    if dep_name == variable.name and len(variable.depends_name) == 0:
+                        self.value = self.value.replace("%{}%".format(variable.name), variable.value)
+                        self.depends_name.remove(dep_name)
 
         # if this variable is completely resolved, call all others that depend on this value
         if not self.depends_name is None and len(self.depends_name) == 0:

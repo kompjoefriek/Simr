@@ -8,6 +8,8 @@ try:
 except ImportError:
     import xml.etree.ElementTree as etree
 
+import shlex
+
 from simr.Configuration.Variable import Variable
 from simr.Configuration.Task import Task
 
@@ -49,8 +51,8 @@ class Configuration:
             variable.resolve(self.variables, [])
         for variable in self.variables:
             if not variable.depends_name is None and not len(variable.depends_name) == 0:
-                raise RuntimeWarning("Variable \"{}\" could not be resolved! Depends on: {}".format(variable.name,
-                                                                                                    variable.depends_name))
+                raise RuntimeWarning("Variable \"{}\" could not be resolved! Depends on: {}"
+                                     .format(variable.name, variable.depends_name))
 
     def parse_tasks(self):
         """
@@ -61,10 +63,14 @@ class Configuration:
         task_root = self.config.find('tasks')
         if task_root is not None:
             for task_element in task_root.findall('task'):
-
+                command = task_element.find("command").text
+                # apply variables to command
+                command = Variable.resolve_value(self.variables, command)
+                # split command and arguments
+                command_list = shlex.split(command)
                 task = {
-                    "command": task_element.find("command").text,
-                    "parameters": [],
+                    "command": command_list[0],
+                    "parameters": command_list[1:],
                     "output": None,
                     "name": task_element.get("name")
                 }

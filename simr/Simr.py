@@ -1,6 +1,10 @@
 __author__ = 'Sander Krause <sanderkrause@gmail.com>'
 
+import os
 import multiprocessing
+
+import psutil
+
 # from pprint import pprint
 
 from simr.Configuration.Configuration import Configuration
@@ -13,20 +17,24 @@ class Simr:
     number_of_processors = 0
 
     def __init__(self):
-        print("Simr v0.0.1")
         self.number_of_processors = multiprocessing.cpu_count()
-        print("Processors found: {}".format(self.number_of_processors))
+        print("Processing units found: {}".format(self.number_of_processors))
 
-        # Parse console input
+        # parse configuration
         self.config = Configuration('../config/simr.xml')
 
-        # variables = self.config.get_variables()
-        # print(variables)
+        #variables = self.config.get_variables()
+        #pprint(variables)
 
         #tasks = self.config.get_tasks()
         #pprint(tasks)
 
-        pass
+        # change to low priority
+        process = psutil.Process()
+        if os.name is "nt":
+            process.nice(psutil.BELOW_NORMAL_PRIORITY_CLASS)
+        else:
+            process.nice(10)  # should about be the same as BELOW_NORMAL_PRIORITY_CLASS
 
     def run(self):
         """
@@ -35,5 +43,3 @@ class Simr:
         self.runner = Runner(self.number_of_processors)
         self.runner.add_tasks(self.config.get_tasks())
         self.runner.run()
-
-        pass
