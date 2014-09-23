@@ -5,12 +5,7 @@ import multiprocessing
 
 import psutil
 
-
-
-
-
 # from pprint import pprint
-
 from simr.Configuration.Configuration import Configuration
 from simr.Task.Runner import Runner
 
@@ -32,7 +27,8 @@ class Simr:
 
     def set_interactive_mode(self, interactive_mode):
         self.interactive_mode = interactive_mode
-        print("Interactive mode: {} (not supported yet)".format(self.interactive_mode))
+        if interactive_mode:
+            print("Interactive mode: {} (not supported yet)".format(self.interactive_mode))
 
     def set_config_file_name(self, config_file_name):
         self.config_file_name = config_file_name
@@ -40,7 +36,7 @@ class Simr:
 
     def run(self):
         # parse configuration
-        self.config = Configuration('../config/simr.xml')
+        self.config = Configuration(self.config_file_name)
 
         #variables = self.config.get_variables()
         #pprint(variables)
