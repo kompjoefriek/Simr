@@ -6,7 +6,7 @@ from simr.Simr import Simr
 
 
 def main():
-    program_description = 'Simr v0.0.1'
+    program_description = 'Simr v0.0.2'
 
     parser = argparse.ArgumentParser(description=program_description)
     parser.add_argument('-m', dest='max_workers', type=int,
