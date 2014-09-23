@@ -5,6 +5,10 @@ import multiprocessing
 
 import psutil
 
+
+
+
+
 # from pprint import pprint
 
 from simr.Configuration.Configuration import Configuration
@@ -14,12 +18,27 @@ from simr.Task.Runner import Runner
 class Simr:
     config = None
     runner = None
-    number_of_processors = 0
+    max_workers = 0
+    interactive_mode = False
+    config_file_name = ""
 
     def __init__(self):
-        self.number_of_processors = multiprocessing.cpu_count()
-        print("Processing units found: {}".format(self.number_of_processors))
+        self.max_workers = multiprocessing.cpu_count()
+        print("Processing units found: {}".format(self.max_workers))
 
+    def set_max_workers(self, max_workers):
+        self.max_workers = max_workers
+        print("Max workers set to: {}".format(self.max_workers))
+
+    def set_interactive_mode(self, interactive_mode):
+        self.interactive_mode = interactive_mode
+        print("Interactive mode: {} (not supported yet)".format(self.interactive_mode))
+
+    def set_config_file_name(self, config_file_name):
+        self.config_file_name = config_file_name
+        print("Config file: {}".format(self.config_file_name))
+
+    def run(self):
         # parse configuration
         self.config = Configuration('../config/simr.xml')
 
@@ -36,10 +55,6 @@ class Simr:
         else:
             process.nice(10)  # should about be the same as BELOW_NORMAL_PRIORITY_CLASS
 
-    def run(self):
-        """
-        Loop through configuration to see which tasks need to be run
-        """
-        self.runner = Runner(self.number_of_processors)
+        self.runner = Runner(self.max_workers)
         self.runner.add_tasks(self.config.get_tasks())
         self.runner.run()
