@@ -14,6 +14,6 @@ Todo:
 
 Examples:
 
-![example 1](github/simr_1.png)
+![example 1](github/Simr_1.png)
 
-![example 2](github/simr_2.png)
+![example 2](github/Simr_2.png)
