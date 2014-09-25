@@ -2,11 +2,7 @@ __author__ = 'Sander Krause <sanderkrause@gmail.com>'
 
 import os
 import multiprocessing
-
 import psutil
-
-
-
 # from pprint import pprint
 from simr.Configuration.Configuration import Configuration
 from simr.Task.Runner import Runner
@@ -41,7 +37,11 @@ class Simr:
         print("Config file: {}".format(self.config_file_name))
 
     def interactive_screen(self, win):
-        import curses
+        try:
+            import curses
+        except ImportError:
+            print("Could not import curses. Please install: http://www.lfd.uci.edu/~gohlke/pythonlibs/#curses")
+            exit(1)
 
         self.curses_screen = win
 
