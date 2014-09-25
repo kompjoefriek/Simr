@@ -6,9 +6,7 @@ from simr.Simr import Simr
 
 
 def main():
-    program_description = 'Simr v0.0.2'
-
-    parser = argparse.ArgumentParser(description=program_description)
+    parser = argparse.ArgumentParser(description=Simr.program_description)
     parser.add_argument('-m', dest='max_workers', type=int,
                         help='max workers allowed simultaneously (default: number of processing units)')
     parser.add_argument('-i', dest='interactive', action='store_true',
@@ -19,7 +17,7 @@ def main():
     # parse arguments and quit if something is missing
     args = parser.parse_args()
 
-    print(program_description)
+    print(Simr.program_description)
 
     # Use Simr to actually run tasks
     simr = Simr()
