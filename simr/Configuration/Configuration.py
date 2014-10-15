@@ -2,6 +2,7 @@
 This file contains the Configuration class, used to encapsulate the XML configuration file config/simr.xml.
 """
 __author__ = 'Sander Krause <sanderkrause@gmail.com>'
+__author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
 
 try:
     from lxml import etree

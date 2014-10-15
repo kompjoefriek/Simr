@@ -2,6 +2,7 @@
 This file contains the class Task, meant to encapsulate a given task as configured.
 """
 __author__ = 'Sander Krause <sanderkrause@gmail.com>'
+__author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
 
 from subprocess import check_call, CalledProcessError
 

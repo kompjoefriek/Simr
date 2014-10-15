@@ -1,8 +1,11 @@
 __author__ = 'Sander Krause <sanderkrause@gmail.com>'
+__author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
 
 import os
 import multiprocessing
+
 import psutil
+
 # from pprint import pprint
 from simr.Configuration.Configuration import Configuration
 from simr.Task.Runner import Runner

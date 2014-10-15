@@ -2,6 +2,7 @@
 This file contains the class Variable, meant to encapsulate a given variable as configured.
 variables can resolve values with variables in them
 """
+__author__ = 'Sander Krause <sanderkrause@gmail.com>'
 __author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
 
 import re

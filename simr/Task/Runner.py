@@ -2,6 +2,7 @@
 This file contains the class Runner, meant to run a given list of tasks
 """
 __author__ = 'Sander Krause <sanderkrause@gmail.com>'
+__author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
 
 import threading
 import time

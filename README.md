@@ -23,3 +23,4 @@ reg copy HKLM\SOFTWARE\Python HKLM\SOFTWARE\Wow6432Node\Python /s
 
 ### Todo  
 - Custom priority of process?
+- Interactive interface? (see curses branch)

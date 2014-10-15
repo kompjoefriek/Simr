@@ -2,6 +2,7 @@
 This file contains the class Task, currently not used (Configuration.Task is used instead)
 """
 __author__ = 'Sander Krause <sanderkrause@gmail.com>'
+__author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
 
 from subprocess import call
 
