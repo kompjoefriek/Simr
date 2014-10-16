@@ -2,7 +2,9 @@ __author__ = 'Sander Krause <sanderkrause@gmail.com>'
 
 import os
 import multiprocessing
+
 import psutil
+
 # from pprint import pprint
 from simr.Configuration.Configuration import Configuration
 from simr.Task.Runner import Runner
@@ -17,6 +19,7 @@ class Simr:
     interactive_mode = False
     config_file_name = ""
     curses_screen = None
+    resized = False
 
     def __init__(self):
         self.processing_units = multiprocessing.cpu_count()
@@ -36,6 +39,7 @@ class Simr:
         self.config_file_name = config_file_name
         print("Config file: {}".format(self.config_file_name))
 
+
     def interactive_screen(self, win):
         try:
             import curses
@@ -51,6 +55,14 @@ class Simr:
         self.curses_screen.keypad(1)
         self.curses_screen.nodelay(1)
         self.curses_screen.timeout(1000)
+
+
+        # def handle(*args):
+        # self.resized = True
+        #     self.curses_screen.refresh()
+        #     pass
+        #
+        # signal.signal(signal.SIGWINCH, handle)
 
         counter = 1
 
@@ -68,6 +80,7 @@ class Simr:
         while 1:
             self.curses_screen.addstr(1, 1, "Max workers: {}".format(self.max_workers))
             self.curses_screen.addstr(3, 1, "Counter: {}".format(counter))
+            self.curses_screen.addstr(5, 1, "Resized: {}".format(self.resized))
             self.curses_screen.refresh()
 
             c = self.curses_screen.getch()
