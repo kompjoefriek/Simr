@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<simr>
+    <variables>
+        <!-- Complex reference example which can be resolved -->
+        <variable name="JAVA" value="'C:\Program Files\Java\jre1.8.0_101\bin\java'" />
+        <variable name="TEST_VERSION" value="1.2.3" />
+        <variable name="TEST_PATH" value="C:\My_SDK" />
+        <variable name="CODE_PATH" value="C:\CodeBase" />
+        <variable name="SERVER_PATH" value="%CODE_PATH%\Stuff\MyServer" />
+        <variable name="OUTPUT_PATH" value="C:\Output" />
+        <variable name="CLASSPATH" value="%TEST_PATH%\mysdk\server\server_mysdk_%TEST_VERSION%.jar;%SERVER_PATH%\bin;%CODE_PATH%\bin;%CODE_PATH%\other\bin" />
+    </variables>
+</simr>

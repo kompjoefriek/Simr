@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<simr>
+    <variables>
+        <!-- Example of a configuration -->
+        <variable name="MY_PATH" value="C:\My\Folder\Client_v%MY_VERSION%.jar;C:\My\Folder\Server_v%MY_VERSION%.jar" />
+        <variable name="MY_VERSION" value="1.2.3" />
+    </variables>
+</simr>

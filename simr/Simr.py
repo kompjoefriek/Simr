@@ -1,6 +1,3 @@
-__author__ = 'Sander Krause <sanderkrause@gmail.com>'
-__author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
-
 import os
 import multiprocessing
 
@@ -11,8 +8,12 @@ from simr.Configuration.Configuration import Configuration
 from simr.Task.Runner import Runner
 
 
+__author__ = 'Sander Krause <sanderkrause@gmail.com>'
+__author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
+
+
 class Simr:
-    program_description = 'Simr v0.0.2'
+    program_description = 'Simr v0.0.3'
     config = None
     runner = None
     processing_units = 0
@@ -96,12 +97,6 @@ class Simr:
         except FileNotFoundError as e:
             print("[Error] File not found: {}".format(e.filename))
             exit(1)
-
-        #variables = self.config.get_variables()
-        #pprint(variables)
-
-        #tasks = self.config.get_tasks()
-        #pprint(tasks)
 
         # change to low priority
         process = psutil.Process()

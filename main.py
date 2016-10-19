@@ -1,9 +1,10 @@
-__author__ = 'Sander Krause <sanderkrause@gmail.com>'
-__author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
-
 import argparse
 
 from simr.Simr import Simr
+
+
+__author__ = 'Sander Krause <sanderkrause@gmail.com>'
+__author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
 
 
 def main():
@@ -22,11 +23,11 @@ def main():
 
     # Use Simr to actually run tasks
     simr = Simr()
-    if not args.max_workers is None:
+    if args.max_workers is not None:
         simr.set_max_workers(args.max_workers)
-    if not args.interactive is None:
+    if args.interactive is not None:
         simr.set_interactive_mode(args.interactive)
-    if not args.configfile is None:
+    if args.configfile is not None:
         simr.set_config_file_name(args.configfile)
     simr.run()
 

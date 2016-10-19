@@ -1,11 +1,12 @@
+import re
+
+
 """
 This file contains the class Variable, meant to encapsulate a given variable as configured.
 variables can resolve values with variables in them
 """
 __author__ = 'Sander Krause <sanderkrause@gmail.com>'
 __author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
-
-import re
 
 
 class Variable:
@@ -27,13 +28,13 @@ class Variable:
 
     @staticmethod
     def get_dependency_list(name, value):
-        if not value is None:
+        if value is not None:
             if value.count('%') % 2 != 0:
                 raise RuntimeWarning("Variable \"{}\" has an uneven count of % chars! (counted {})"
                                      .format(name, value.count('%')))
             else:
                 matches = re.findall(r"%([^%]+)%", value)
-                if not matches is None:
+                if matches is not None:
                     # remove duplicates and store
                     return list(set(matches))
         return None
@@ -49,7 +50,7 @@ class Variable:
 
     def check_references(self, variables):
         for variable in variables:
-            if not self.name is None and not variable.depends_name is None:
+            if self.name is not None and variable.depends_name is not None:
                 if self.name in variable.depends_name:
                     self.depends_ref.append(variable)
 
@@ -63,7 +64,7 @@ class Variable:
         # make copy so we can alter the original inside the loop
         depends_name_copy = self.depends_name
 
-        if not self.value is None and not depends_name_copy is None:
+        if self.value is not None and depends_name_copy is not None:
             for dep_name in depends_name_copy:
                 for variable in variables:
                     if dep_name == variable.name and len(variable.depends_name) == 0:
@@ -71,7 +72,8 @@ class Variable:
                         self.depends_name.remove(dep_name)
 
         # if this variable is completely resolved, call all others that depend on this value
-        if not self.depends_name is None and len(self.depends_name) == 0:
+        if self.depends_name is not None and len(self.depends_name) == 0:
+            call_chain.remove(self.name)
             for reference in self.depends_ref:
                 reference.resolve(variables, call_chain)
                 # self.depends_ref.clear()

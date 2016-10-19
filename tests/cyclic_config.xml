@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<simr>
-    <variables>
-		<!-- Cyclic reference, none can be resolved -->
-        <variable name="VAR_C" value="Data %VAR_A%" />
-        <variable name="VAR_B" value="Data %VAR_C%" />
-        <variable name="VAR_A" value="Data %VAR_B%" />
-    </variables>
-</simr>

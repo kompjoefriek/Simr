@@ -1,9 +1,3 @@
-"""
-This file contains the Configuration class, used to encapsulate the XML configuration file config/simr.xml.
-"""
-__author__ = 'Sander Krause <sanderkrause@gmail.com>'
-__author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
-
 try:
     from lxml import etree
 except ImportError:
@@ -13,6 +7,13 @@ import shlex
 
 from simr.Configuration.Variable import Variable
 from simr.Configuration.Task import Task
+
+
+"""
+This file contains the Configuration class, used to encapsulate the XML configuration file config/simr.xml.
+"""
+__author__ = 'Sander Krause <sanderkrause@gmail.com>'
+__author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
 
 
 class Configuration:
@@ -28,8 +29,10 @@ class Configuration:
         document = etree.parse(filename)
         self.config = document.getroot()
         # parse variables
+        self.variables = []
         self.parse_variables()
         # parse tasks
+        self.tasks = []
         self.parse_tasks()
 
     def parse_variables(self):
@@ -51,7 +54,7 @@ class Configuration:
         for variable in self.variables:
             variable.resolve(self.variables, [])
         for variable in self.variables:
-            if not variable.depends_name is None and not len(variable.depends_name) == 0:
+            if variable.depends_name is not None and not len(variable.depends_name) == 0:
                 raise RuntimeWarning("Variable \"{}\" could not be resolved! Depends on: {}"
                                      .format(variable.name, variable.depends_name))
 
