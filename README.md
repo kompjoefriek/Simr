@@ -1,4 +1,4 @@
-# Simr
+# Simr [![Build Status](https://travis-ci.org/kompjoefriek/Simr.svg?branch=master)](https://travis-ci.org/kompjoefriek/Simr)
 
 
 Simr is a simulation runner written in Python 3
