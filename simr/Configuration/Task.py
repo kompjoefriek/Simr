@@ -47,7 +47,7 @@ class Task:
         command_and_parameters.extend(self.parameters)
         try:
             check_call(command_and_parameters)
-        except FileNotFoundError as e:
+        except (OSError, IOError) as e:
             print("Error in task({}): {}".format(self.name, e.strerror))
         except CalledProcessError as e:
             print("Error in task({}): exit code {}".format(self.name, e.returncode))

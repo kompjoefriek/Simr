@@ -9,8 +9,18 @@ cache:
 
 # command to install dependencies
 install:
-  - pip install psutil
+  - pip install psutil flake8
 
 # command to run tests
 script:
   - py.test
+
+after_script:
+  - python main.py
+  - python main.py -h
+  - python main.py does_not_exist.xml
+  - python main.py config/simr.xml
+  - python main.py tests/run_example.xml
+
+after_success:
+  - flake8

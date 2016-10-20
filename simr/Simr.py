@@ -94,7 +94,7 @@ class Simr:
         try:
             # parse configuration
             self.config = Configuration(self.config_file_name)
-        except FileNotFoundError as e:
+        except (OSError, IOError) as e:
             print("[Error] File not found: {}".format(e.filename))
             exit(1)
 
