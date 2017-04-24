@@ -31,5 +31,6 @@ def main():
         simr.set_config_file_name(args.configfile)
     simr.run()
 
+
 if __name__ == "__main__":
     main()
