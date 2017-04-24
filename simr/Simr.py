@@ -3,7 +3,6 @@ import multiprocessing
 
 import psutil
 
-# from pprint import pprint
 from simr.Configuration.Configuration import Configuration
 from simr.Task.Runner import Runner
 
@@ -13,7 +12,7 @@ __author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
 
 
 class Simr:
-    program_description = 'Simr v0.0.3'
+    program_description = 'Simr v0.0.4'
     config = None
     runner = None
     processing_units = 0

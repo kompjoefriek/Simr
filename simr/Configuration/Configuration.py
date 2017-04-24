@@ -4,22 +4,20 @@ except ImportError:
     import xml.etree.ElementTree as etree
 
 import shlex
+import time
 
 from simr.Configuration.Variable import Variable
 from simr.Configuration.Task import Task
 
 
-"""
-This file contains the Configuration class, used to encapsulate the XML configuration file config/simr.xml.
-"""
+# This file contains the Configuration class, used to encapsulate the XML configuration file config/simr.xml.
 __author__ = 'Sander Krause <sanderkrause@gmail.com>'
 __author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
+__author__ = 'Luke Buitendijk <mail@here.com>'
 
 
 class Configuration:
-    """
-    Provide an encapsulated way to parse the configuration file and access its properties.
-    """
+    # Provide an encapsulated way to parse the configuration file and access its properties.
 
     config = None
     variables = []
@@ -30,15 +28,26 @@ class Configuration:
         self.config = document.getroot()
         # parse variables
         self.variables = []
+
+        # Add custom date variable
+        dateVariable = {
+            "name": "DATE",
+            "value": time.strftime("%Y%m%d"),
+        }
+        self.variables.append(Variable(**dateVariable))
+        timeVariable = {
+            "name": "TIME",
+            "value": time.strftime("%H%M%S"),
+        }
+        self.variables.append(Variable(**timeVariable))
+
         self.parse_variables()
         # parse tasks
         self.tasks = []
         self.parse_tasks()
 
     def parse_variables(self):
-        """
-        Parse the variables from the configuration, and fill the list with Variable objects.
-        """
+        # Parse the variables from the configuration, and fill the list with Variable objects.
         if self.config is None:
             raise RuntimeError('Attempting to parse empty configuration')
         variable_root = self.config.find('variables')
@@ -59,9 +68,7 @@ class Configuration:
                                      .format(variable.name, variable.depends_name))
 
     def parse_tasks(self):
-        """
-        Parse the tasks from the configuration, and fill the list with Task objects.
-        """
+        # Parse the tasks from the configuration, and fill the list with Task objects.
         if self.config is None:
             raise RuntimeError('Attempting to parse empty configuration')
         task_root = self.config.find('tasks')
@@ -89,13 +96,9 @@ class Configuration:
                 self.tasks.append(Task(**task))
 
     def get_variables(self):
-        """
-        Get the parsed variables from the configuration.
-        """
+        # Get the parsed variables from the configuration.
         return self.variables
 
     def get_tasks(self):
-        """
-        Get the parsed tasks from the configuration.
-        """
+        # Get the parsed tasks from the configuration.
         return self.tasks

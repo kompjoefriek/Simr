@@ -21,6 +21,14 @@ reg copy HKLM\SOFTWARE\Python HKLM\SOFTWARE\Wow6432Node\Python /s
 
 ![example 2](github/Simr_2.png)
 
+### Predefined variables:
+
+%DATE%: Date when Simr started in format: %Y%m%d (e.g. 20170420)
+%TIME%: Time when Simr started in format: %H%M%S (e.g. 163058)
+
+For format details, see [time.strftime](https://docs.python.org/2/library/time.html#time.strftime)
+
 ### Todo  
 - Custom priority of process?
 - Interactive interface? (see curses branch)
+- Custom Date or Time format?

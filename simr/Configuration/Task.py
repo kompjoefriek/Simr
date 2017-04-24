@@ -1,17 +1,13 @@
 from subprocess import check_call, CalledProcessError
 
 
-"""
-This file contains the class Task, meant to encapsulate a given task as configured.
-"""
+# This file contains the class Task, meant to encapsulate a given task as configured.
 __author__ = 'Sander Krause <sanderkrause@gmail.com>'
 __author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
 
 
 class Task:
-    """
-    Encapsulate a task as configured in the configuration file.
-    """
+    # Encapsulate a task as configured in the configuration file.
 
     name = None
     command = None
@@ -46,7 +42,7 @@ class Task:
         command_and_parameters = [self.command]
         command_and_parameters.extend(self.parameters)
         try:
-            check_call(command_and_parameters)
+            check_call(command_and_parameters, shell=True)
         except (OSError, IOError) as e:
             print("Error in task({}): {}".format(self.name, e.strerror))
         except CalledProcessError as e:
@@ -56,4 +52,4 @@ class Task:
         import json
 
         return "Task {{\n  name:\"{}\",\n  command: \"{}\",\n  parameters: {}\n  output: {},\n}}" \
-            .format(self.name, self.command, json.dumps(self.parameters), self.output)\
+            .format(self.name, self.command, json.dumps(self.parameters), self.output)

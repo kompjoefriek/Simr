@@ -21,3 +21,7 @@ def test_variables_complex_config():
 def test_variables_cyclic_config():
     with pytest.raises(RuntimeWarning):
         Configuration("tests/variables_cyclic_config.xml")
+
+
+def test_variables_date_config():
+    Configuration("tests/variables_date_config.xml")
