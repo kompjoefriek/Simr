@@ -13,7 +13,7 @@ from simr.Configuration.Task import Task
 # This file contains the Configuration class, used to encapsulate the XML configuration file config/simr.xml.
 __author__ = 'Sander Krause <sanderkrause@gmail.com>'
 __author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
-__author__ = 'Luke Buitendijk <mail@here.com>'
+__author__ = 'Luke Buitendijk <lukebuitendijk@gmail.com>'
 
 
 class Configuration:
