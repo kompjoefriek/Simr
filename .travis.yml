@@ -4,12 +4,16 @@ python:
   - "2.7"
   - "3.8"
 
+os:
+  - linux
+  - osx
+
 cache:
   - pip
 
 # command to install dependencies
 install:
-  - pip install psutil flake8
+  - pip install -r requirements.txt
 
 # command to run tests
 script:
