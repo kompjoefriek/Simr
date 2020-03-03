@@ -99,7 +99,7 @@ class Simr:
 
         # change to low priority
         process = psutil.Process()
-        if os.name is "nt":
+        if os.name == "nt":
             process.nice(psutil.BELOW_NORMAL_PRIORITY_CLASS)
         else:
             process.nice(10)  # should about be the same as BELOW_NORMAL_PRIORITY_CLASS
