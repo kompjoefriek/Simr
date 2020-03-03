@@ -8,7 +8,7 @@
     </variables>
     <tasks>
         <task>
-            <command><![CDATA[cmd /c echo "Hello, World!"]]></command>
+            <command><![CDATA[echo "Hello, World!"]]></command>
             <input>
                 <!-- optional, for example when certain input parameters are needed for the command that need to be escaped? -->
                 <parameter name="key" value="value" />
@@ -19,7 +19,7 @@
             </output>
         </task>
         <task>
-            <command><![CDATA[cmd /c echo "Hello, World! 2"]]></command>
+            <command><![CDATA[echo "Hello, World! 2"]]></command>
         </task>
 
         <!-- Example of a java task -->

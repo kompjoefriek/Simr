@@ -8,25 +8,15 @@
     </variables>
     <tasks>
         <task>
-            <command><![CDATA[cmd /c echo "Hello, World!"]]></command>
-        </task>
-
-        <task>
             <command><![CDATA[echo "Hello, World!"]]></command>
         </task>
 
 
-        <task name="First var WIN">
-            <command><![CDATA[cmd /c echo "SDK_VERSION = %SDK_VERSION%"]]></command>
-        </task>
-        <task name="First var NIX">
+        <task name="First var">
             <command><![CDATA[echo "SDK_VERSION = %SDK_VERSION%"]]></command>
         </task>
 
-        <task name="Second var WIN">
-            <command><![CDATA[cmd /c echo "SDK_CLASSPATH = %SDK_CLASSPATH%"]]></command>
-        </task>
-        <task name="Second var NIX">
+        <task name="Second var">
             <command><![CDATA[echo "SDK_CLASSPATH = %SDK_CLASSPATH%"]]></command>
         </task>
 
