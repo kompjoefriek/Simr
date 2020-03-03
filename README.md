@@ -1,4 +1,4 @@
-# Simr [![Build Status](https://travis-ci.org/kompjoefriek/Simr.svg?branch=master)](https://travis-ci.org/kompjoefriek/Simr)
+# Simr [![Build Status](https://travis-ci.org/kompjoefriek/Simr.svg?branch=master)](https://travis-ci.org/kompjoefriek/Simr) [![codecov](https://codecov.io/gh/kompjoefriek/Simr/branch/master/graph/badge.svg)](https://codecov.io/gh/kompjoefriek/Simr)
 
 
 Simr is a simulation runner written in Python 3, but is backwards compatible with Python 2 (see Travis-ci build status).
