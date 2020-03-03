@@ -21,6 +21,7 @@ matrix:
         # - python -m pip install --upgrade pip
         - pip install pytest --user
         - pip install codecov --user
+        - pip install flake8 --user
       install: pip install ".[test]" --user
       script: python -m pytest
       after_success: python  -m codecov
@@ -33,6 +34,7 @@ matrix:
         - pip3 install -U pip
         - pip3 install -U pytest
         - pip3 install codecov
+        - pip3 install flake8
       script: python3 -m pytest
       after_success: python 3 -m codecov
     #  ====== WINDOWS =========
@@ -45,6 +47,7 @@ matrix:
         - python -m pip install --upgrade pip
         - pip install --upgrade pytest
         - pip install codecov
+        - pip install flake8
       env: PATH=/c/Python27:/c/Python27/Scripts:$PATH
     - name: "Python 3.7.4 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
@@ -55,6 +58,7 @@ matrix:
         - python -m pip install --upgrade pip
         - pip3 install --upgrade pytest
         - pip3 install codecov
+        - pip3 install flake8
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
 
 cache:
@@ -65,11 +69,12 @@ before_install:
   - pip install -U pip
   - pip install -U pytest
   - pip install codecov
+  - pip install flake8
 
 install: python -m pip install -r requirements.txt # install dependencies
 
 before_script:
-  - flake8 --exclude ./config,./github./,./scripts,./tests --ignore=E501
+  - flake8 --exclude ./config,./github,./scripts,./tests --ignore=E501
 
 script: pytest # run tests
 
