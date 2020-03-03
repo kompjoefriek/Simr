@@ -20,11 +20,13 @@ matrix:
         # - pip install -U pip
         # - python -m pip install --upgrade pip
         - pip install pytest --user
-        - pip install codecov --user
+        - pip install pytest-cov --user
         - pip install flake8 --user
       install: pip install --user -r requirements.txt # install dependencies
+      before_script:
+        - python -m flake8 --exit-zero --exclude ./config,./github,./scripts,./tests --ignore=E501
       script: python -m pytest
-      after_success: python  -m codecov
+      after_success: python -m codecov
     - name: "Python 3.7.3 on macOS 10.14"
       os: osx
       osx_image: xcode10.2  # Python 3.7.3 running on macOS 10.14.3
@@ -68,6 +70,7 @@ before_install:
   - python --version
   - pip install -U pip
   - pip install -U pytest
+  - pip install pytest-cov
   - pip install codecov
   - pip install flake8
 
@@ -76,7 +79,7 @@ install: python -m pip install -r requirements.txt # install dependencies
 before_script:
   - flake8 --exit-zero --exclude ./config,./github,./scripts,./tests --ignore=E501
 
-script: pytest # run tests
+script: pytest --cov=./ --cov-report=xml # run tests
 
 after_script:
   - python main.py
