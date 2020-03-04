@@ -5,16 +5,7 @@ Simr is a simulation runner written in Python 3, but is backwards compatible wit
 
 ### Dependencies  
 - [psutil](https://pypi.org/project/psutil/)
-
-#### Windows only!  
-- [\_curses](https://pypi.org/project/windows-curses/ or http://www.lfd.uci.edu/~gohlke/pythonlibs/#curses)
-
-#### Note:  
-64bit installer may not find your 64bit python install !  
-Use the 32bit installers, or execute the following command as administrator instead:
-```
-reg copy HKLM\SOFTWARE\Python HKLM\SOFTWARE\Wow6432Node\Python /s
-```
+- [windows_curses](https://pypi.org/project/windows-curses/)
 
 ### Examples  
 ![example 1](github/Simr_1.png)
