@@ -23,7 +23,7 @@
         </task>
 
         <!-- Example of a java task -->
-        <task name="My First Simulation"> <!-- optional name? Could be used to print when starting the task (or for logging) -->
+        <task name="My First Simulation"> <!-- optional name, used to print when starting the task -->
             <command><![CDATA[java -cp "Test.jar;lib/*" my.package.MainClass]]></command>
         </task>
 

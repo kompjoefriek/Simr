@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<simr>
+    <tasks>
+        <task name="My Test 1">
+            <command><![CDATA[timeout /t 8 /nobreak > nul]]></command>
+        </task>
+        <task name="My Test 2">
+            <command><![CDATA[timeout /t 6 /nobreak > nul]]></command>
+        </task>
+        <task name="My Test 3">
+            <command><![CDATA[timeout /t 3 /nobreak > nul]]></command>
+        </task>
+        <task name="My Test 4">
+            <command><![CDATA[timeout /t 7 /nobreak > nul]]></command>
+        </task>
+        <task name="My Test 5">
+            <command><![CDATA[timeout /t 12 /nobreak > nul]]></command>
+        </task>
+        <task name="My Test 6">
+            <command><![CDATA[timeout /t 4 /nobreak > nul]]></command>
+        </task>
+        <task name="My Test 7">
+            <command><![CDATA[timeout /t 10 /nobreak > nul]]></command>
+        </task>
+    </tasks>
+</simr>
