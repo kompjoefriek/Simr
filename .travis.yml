@@ -2,7 +2,9 @@ language: python
 
 # Used travis-ci guide as base: https://blog.travis-ci.com/2019-08-07-extensive-python-testing-on-travis-ci
 
+# ==================
 # ===== Linux ======
+# ==================
 dist: focal
 python:
   - 2.7
@@ -12,7 +14,9 @@ python:
 
 matrix:
   include:
+    # ====================
     # ======= OSX ========
+    # ====================
     - name: "Python 2.7.14 on macOS 10.13"
       os: osx
       osx_image: xcode9.3   # Python 2.7.14_2 running on macOS 10.13
@@ -56,7 +60,9 @@ matrix:
         - pip3 install flake8
       script: python3 -m pytest --cov=./ --cov-report=xml # run tests
       after_success: python 3 -m codecov
+    # =========================
     #  ====== WINDOWS =========
+    # =========================
     - name: "Python 2.7 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
       language: shell # 'language: python' errors Travis CI Windows
