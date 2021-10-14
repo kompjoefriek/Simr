@@ -1,4 +1,5 @@
 # Simr [![Build Status](https://api.travis-ci.com/kompjoefriek/Simr.svg?branch=master)](https://app.travis-ci.com/github/kompjoefriek/Simr) [![codecov](https://codecov.io/gh/kompjoefriek/Simr/branch/master/graph/badge.svg)](https://codecov.io/gh/kompjoefriek/Simr)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkompjoefriek%2FSimr.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkompjoefriek%2FSimr?ref=badge_shield)
 
 
 Simr is a simulation runner written in Python 3, but is backwards compatible with Python 2 (see Travis-ci build status).
@@ -23,3 +24,7 @@ For format details, see [time.strftime](https://docs.python.org/2/library/time.h
 - [ ] Custom priority of process?
 - [ ] Interactive interface? (see curses branch)
 - [ ] Custom Date or Time format?
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkompjoefriek%2FSimr.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkompjoefriek%2FSimr?ref=badge_large)
