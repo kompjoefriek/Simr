@@ -24,8 +24,12 @@ class Configuration:
     tasks = []
 
     def __init__(self, filename):
-        document = etree.parse(filename)
-        self.config = document.getroot()
+        try:
+            document = etree.parse(filename)
+            self.config = document.getroot()
+        except etree.ParseError:
+            raise RuntimeError('Attempting to parse empty configuration')
+
         # parse variables
         self.variables = []
 

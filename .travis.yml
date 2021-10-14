@@ -1,11 +1,12 @@
 language: python
 
 # Used travis-ci guide as base: https://blog.travis-ci.com/2019-08-07-extensive-python-testing-on-travis-ci
-# No support for Python 3.10 yet, because terhe is no windows-curses package for that version yet. See: https://github.com/zephyrproject-rtos/windows-curses
+# No support for Python 3.10 yet, because there is no windows-curses package for that version yet. See: https://github.com/zephyrproject-rtos/windows-curses
 
 # =====================
 # ======= Linux =======
 # =====================
+os: linux
 dist: focal
 python:
   - 2.7
@@ -13,16 +14,17 @@ python:
   - 3.8
   - 3.9
 
-matrix:
+jobs:
   include:
     # ========================
     # ======= FreeBSD ========
     # ========================
     - os: freebsd
-      python:
-      - 2.7
-      - 3.6
-      - 3.8
+      python: 2.7
+    - os: freebsd
+      python: 3.6
+    - os: freebsd
+      python: 3.8
     # ====================
     # ======= OSX ========
     # ====================

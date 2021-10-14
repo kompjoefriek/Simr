@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<simr>
+    <tasks>
+        <task name="echo">
+            <command><![CDATA[echo. & echo Echo from a task command]]></command>
+        </task>
+    </tasks>
+</simr>
