@@ -11,7 +11,7 @@ def test_no_config():
 
 
 def test_non_existing_config():
-    with pytest.raises(FileNotFoundError):
+    with pytest.raises(IOError):
         Configuration("tests/config/non_existing_config.xml")
 
 
