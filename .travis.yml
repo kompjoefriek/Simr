@@ -1,16 +1,24 @@
 language: python
 
 # Used travis-ci guide as base: https://blog.travis-ci.com/2019-08-07-extensive-python-testing-on-travis-ci
+# No support for Python 3.10 yet, because terhe is no windows-curses package for that version yet. See: https://github.com/zephyrproject-rtos/windows-curses
 
 # ==================
 # ===== Linux ======
 # ==================
+dist: xenial
+python:
+  - 2.7
+  - 3.4
+  - 3.8
+  - 3.9
+
 dist: focal
 python:
   - 2.7
-  - 3.7
+  - 3.4
+  - 3.8
   - 3.9
-  - 3.10
 
 matrix:
   include:
@@ -47,9 +55,9 @@ matrix:
         - pip3 install flake8
       script: python3 -m pytest --cov=./ --cov-report=xml # run tests
       after_success: python 3 -m codecov
-    - name: "Python 3.? on macOS 11.3"
+    - name: "Python 3.9.5 on macOS 11.3"
       os: osx
-      osx_image: xcode12.5  # Python 3.? running on macOS 11.3
+      osx_image: xcode12.5  # Python 3.9.5 running on macOS 11.3
       language: shell       # 'language: python' is an error on Travis CI macOS
       before_install:
         - python3 --version
@@ -75,11 +83,23 @@ matrix:
         - pip install codecov
         - pip install flake8
       env: PATH=/c/Python27:/c/Python27/Scripts:$PATH
-    - name: "Python 3.7.4 on Windows"
+    - name: "Python 3.4.4 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
       language: shell       # 'language: python' is an error on Travis CI Windows
       before_install:
-        - choco install python --version 3.7.4
+        - choco install python --version 3.4.4
+        - python --version
+        - python -m pip install --upgrade pip
+        - pip3 install --upgrade pytest
+        - pip3 install pytest-cov
+        - pip3 install codecov
+        - pip3 install flake8
+      env: PATH=/c/Python34:/c/Python34/Scripts:$PATH
+    - name: "Python 3.7.9 on Windows"
+      os: windows           # Windows 10.0.17134 N/A Build 17134
+      language: shell       # 'language: python' is an error on Travis CI Windows
+      before_install:
+        - choco install python --version 3.7.9
         - python --version
         - python -m pip install --upgrade pip
         - pip3 install --upgrade pytest
@@ -87,11 +107,23 @@ matrix:
         - pip3 install codecov
         - pip3 install flake8
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
-    - name: "Python 3.9.0 on Windows"
+    - name: "Python 3.8.10 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
       language: shell       # 'language: python' is an error on Travis CI Windows
       before_install:
-        - choco install python --version 3.9.0
+        - choco install python --version 3.8.10
+        - python --version
+        - python -m pip install --upgrade pip
+        - pip3 install --upgrade pytest
+        - pip3 install pytest-cov
+        - pip3 install codecov
+        - pip3 install flake8
+      env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
+    - name: "Python 3.9.7 on Windows"
+      os: windows           # Windows 10.0.17134 N/A Build 17134
+      language: shell       # 'language: python' is an error on Travis CI Windows
+      before_install:
+        - choco install python --version 3.9.7
         - python --version
         - python -m pip install --upgrade pip
         - pip3 install --upgrade pytest
@@ -99,18 +131,6 @@ matrix:
         - pip3 install codecov
         - pip3 install flake8
       env: PATH=/c/Python39:/c/Python39/Scripts:$PATH
-    - name: "Python 3.10.0 on Windows"
-      os: windows           # Windows 10.0.17134 N/A Build 17134
-      language: shell       # 'language: python' is an error on Travis CI Windows
-      before_install:
-        - choco install python --version 3.10.0
-        - python --version
-        - python -m pip install --upgrade pip
-        - pip3 install --upgrade pytest
-        - pip3 install pytest-cov
-        - pip3 install codecov
-        - pip3 install flake8
-      env: PATH=/c/Python310:/c/Python310/Scripts:$PATH
 
 cache:
   - pip
