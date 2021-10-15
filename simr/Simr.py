@@ -12,7 +12,7 @@ __author__ = 'Roel van Nuland <roel@kompjoefriek.nl>'
 
 
 class Simr:
-    program_description = 'Simr v0.0.4'
+    program_description = 'Simr v0.0.5'
     config = None
     runner = None
     processing_units = 0
@@ -43,7 +43,7 @@ class Simr:
         try:
             import curses
         except ImportError:
-            print("Could not import curses. Please install: http://www.lfd.uci.edu/~gohlke/pythonlibs/#curses")
+            print("Could not import curses. Please run 'pip install windows-curses' or install curses manually from: http://www.lfd.uci.edu/~gohlke/pythonlibs/#curses")
             exit(1)
 
         self.curses_screen = win
@@ -102,7 +102,7 @@ class Simr:
         if os.name == "nt":
             process.nice(psutil.BELOW_NORMAL_PRIORITY_CLASS)
         else:
-            process.nice(10)  # should about be the same as BELOW_NORMAL_PRIORITY_CLASS
+            process.nice(10)  # should be about the same as BELOW_NORMAL_PRIORITY_CLASS
 
         self.runner = Runner(self.max_workers)
         self.runner.add_tasks(self.config.get_tasks())

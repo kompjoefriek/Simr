@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<simr>
+    <tasks>
+        <task>
+            <command><![CDATA[echo "Hello, output"]]></command>
+            <output>
+                <!-- optional redirect for output: log, stdout, etc. -->
+                <redirect target="stdout" />
+            </output>
+        </task>
+    </tasks>
+</simr>
