@@ -56,6 +56,7 @@ jobs:
         - pip3 install pytest-cov
         - pip3 install codecov
         - pip3 install flake8
+        - pip3 install -U psutil # should not be needed, but unittests will fail witout upgrading it
       script: python3 -m pytest --cov=./ --cov-report=xml # run tests
       after_success: python 3 -m codecov
     - name: "Python 3.9.5 on macOS 11.3"
@@ -69,6 +70,7 @@ jobs:
         - pip3 install pytest-cov
         - pip3 install codecov
         - pip3 install flake8
+        - pip3 install -U psutil # should not be needed, but unittests will fail witout upgrading it
       script: python3 -m pytest --cov=./ --cov-report=xml # run tests
       after_success: python 3 -m codecov
     # =========================
