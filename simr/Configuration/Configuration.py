@@ -27,8 +27,10 @@ class Configuration:
         try:
             document = etree.parse(filename)
             self.config = document.getroot()
-        except etree.ParseError:
-            raise RuntimeError('Attempting to parse empty configuration')
+        except etree.ParseError as e:
+            row, column = e.position
+            raise RuntimeError("Parsing xml \"{}\" failed on line {}, column {}"
+                               .format(filename, row, column))
 
         # parse variables
         self.variables = []

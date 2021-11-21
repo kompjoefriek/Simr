@@ -36,11 +36,11 @@ jobs:
         - python --version
         # - pip install -U pip
         # - python -m pip install --upgrade pip
-        - pip install pytest --user
-        - pip install pytest-cov --user
-        - pip install codecov --user
-        - pip install flake8 --user
-      install: pip install --user -r requirements.txt # install dependencies
+        - pip install -U pytest --user
+        - pip install -U pytest-cov --user
+        - pip install -U codecov --user
+        - pip install -U flake8 --user
+      install: pip install --user -U -r requirements.txt # install dependencies
       before_script:
         - python -m flake8 --exclude ./config,./github,./scripts,./tests --ignore=E501
       script: python -m pytest --cov=./ --cov-report=xml # run tests
@@ -53,10 +53,9 @@ jobs:
         - python3 --version
         - pip3 install -U pip
         - pip3 install -U pytest
-        - pip3 install pytest-cov
-        - pip3 install codecov
-        - pip3 install flake8
-        - pip3 install -U psutil # should not be needed, but unittests will fail witout upgrading it
+        - pip3 install -U pytest-cov
+        - pip3 install -U codecov
+        - pip3 install -U flake8
       script: python3 -m pytest --cov=./ --cov-report=xml # run tests
       after_success: python 3 -m codecov
     - name: "Python 3.9.5 on macOS 11.3"
@@ -67,10 +66,9 @@ jobs:
         - python3 --version
         - pip3 install -U pip
         - pip3 install -U pytest
-        - pip3 install pytest-cov
-        - pip3 install codecov
-        - pip3 install flake8
-        - pip3 install -U psutil # should not be needed, but unittests will fail witout upgrading it
+        - pip3 install -U pytest-cov
+        - pip3 install -U codecov
+        - pip3 install -U flake8
       script: python3 -m pytest --cov=./ --cov-report=xml # run tests
       after_success: python 3 -m codecov
     # =========================
@@ -83,10 +81,10 @@ jobs:
         - choco install python2
         - python --version
         - python -m pip install --upgrade pip
-        - pip install --upgrade pytest
-        - pip install pytest-cov
-        - pip install codecov
-        - pip install flake8
+        - pip install -U pytest
+        - pip install -U pytest-cov
+        - pip install -U codecov
+        - pip install -U flake8
       env: PATH=/c/Python27:/c/Python27/Scripts:$PATH
     - name: "Python 3.5.4 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
@@ -95,10 +93,10 @@ jobs:
         - choco install python --version 3.5.4
         - python --version
         - python -m pip install --upgrade pip
-        - pip3 install --upgrade pytest
-        - pip3 install pytest-cov
-        - pip3 install codecov
-        - pip3 install flake8
+        - pip3 install -U pytest
+        - pip3 install -U pytest-cov
+        - pip3 install -U codecov
+        - pip3 install -U flake8
       env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
     - name: "Python 3.7.9 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
@@ -107,10 +105,10 @@ jobs:
         - choco install python --version 3.7.9
         - python --version
         - python -m pip install --upgrade pip
-        - pip3 install --upgrade pytest
-        - pip3 install pytest-cov
-        - pip3 install codecov
-        - pip3 install flake8
+        - pip3 install -U pytest
+        - pip3 install -U pytest-cov
+        - pip3 install -U codecov
+        - pip3 install -U flake8
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
     - name: "Python 3.8.10 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
@@ -119,10 +117,10 @@ jobs:
         - choco install python --version 3.8.10
         - python --version
         - python -m pip install --upgrade pip
-        - pip3 install --upgrade pytest
-        - pip3 install pytest-cov
-        - pip3 install codecov
-        - pip3 install flake8
+        - pip3 install -U pytest
+        - pip3 install -U pytest-cov
+        - pip3 install -U codecov
+        - pip3 install -U flake8
       env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
     - name: "Python 3.9.7 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
@@ -131,10 +129,10 @@ jobs:
         - choco install python --version 3.9.7
         - python --version
         - python -m pip install --upgrade pip
-        - pip3 install --upgrade pytest
-        - pip3 install pytest-cov
-        - pip3 install codecov
-        - pip3 install flake8
+        - pip3 install -U pytest
+        - pip3 install -U pytest-cov
+        - pip3 install -U codecov
+        - pip3 install -U flake8
       env: PATH=/c/Python39:/c/Python39/Scripts:$PATH
 
 cache:
@@ -144,18 +142,18 @@ before_install:
   - python --version
   - pip install -U pip
   - pip install -U pytest
-  - pip install pytest-cov
-  - pip install codecov
-  - pip install flake8
+  - pip install -U pytest-cov
+  - pip install -U codecov
+  - pip install -U flake8
 
-install: python -m pip install -r requirements.txt # install dependencies
+install: python -m pip install -U -r requirements.txt # install dependencies
 
 before_script:
   - flake8 --exclude ./config,./github,./scripts,./tests --ignore=E501
 
 script: pytest --cov=./ --cov-report=xml # run tests
 
-after_script:
+after_script: # This is here to check if the script actually runs
   - python main.py
   - python main.py -h
   - python main.py does_not_exist.xml
