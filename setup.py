@@ -10,5 +10,9 @@ setup(
     license = "MIT",
     keywords = "taskrunner",
     url = "https://github.com/kompjoefriek/Simr",
-    packages=['simr', 'tests']
+    packages=['simr', 'tests'],
+    install_requires=[
+        'psutil',
+        'windows-curses ; platform_system=="Windows"'
+    ]
 )
