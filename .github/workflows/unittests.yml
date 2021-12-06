@@ -1,0 +1,35 @@
+name: UnitTests and CodeCoverage
+
+# Triggers the workflow on push or pull request events
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: [2.7, 3.5, 3.8, 3.9]
+    env:
+      OS: ${{ matrix.os }}
+      PYTHON: ${{ matrix.python-version }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: lpenz/ghaction-pytest-cov@v1
+      - uses: codecov/codecov-action@v2
+        with:
+          parallel: true
+          flag-name: python-${{ matrix.os }}-${{ matrix.python-version }}
+          env_vars: OS,PYTHON
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+  coverage-finish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: codecov/codecov-action@v2
+        with:
+          parallel-finished: true
+          env_vars: OS,PYTHON
