@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<simr>
+    <variables>
+        <!-- Example of a configuration -->
+        <variable name="SDK_CLASSPATH" value="C:\My\Folder\Client_v%SDK_VERSION%.jar;C:\My\Folder\Server_v%SDK_VERSION%.jar" />
+        <!-- Please note the "wrong" order there are defined in. I'd like to make it work even like this. -->
+        <variable name="SDK_VERSION" value="1.2.3" />
+
+    <tasks>
+        <task>
+            <command><![CDATA[echo "Hello, World!"]]></command>
+        </task>
+
+
+        <task name="First var">
+            <command><![CDATA[echo "SDK_VERSION = %SDK_VERSION%"]]></command>
+        </task>
+
+        <task name="Second var">
+            <command><![CDATA[echo "SDK_CLASSPATH = %SDK_CLASSPATH%"]]></command>
+        </task>
+
+    </tasks>
+</simr>
