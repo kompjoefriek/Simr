@@ -1,4 +1,4 @@
-# Simr [![Build Status](https://app.travis-ci.com/kompjoefriek/Simr.svg?branch=master)](https://app.travis-ci.com/github/kompjoefriek/Simr) [![codecov](https://codecov.io/gh/kompjoefriek/Simr/branch/master/graph/badge.svg)](https://codecov.io/gh/kompjoefriek/Simr) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkompjoefriek%2FSimr.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkompjoefriek%2FSimr?ref=badge_shield)
+# Simr [![Build Status](https://github.com/kompjoefriek/Simr/actions/workflows/unittests.yml/badge.svg?branch=master)](https://github.com/kompjoefriek/Simr/actions/workflows/unittests.yml) [![codecov](https://codecov.io/gh/kompjoefriek/Simr/branch/master/graph/badge.svg)](https://codecov.io/gh/kompjoefriek/Simr) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkompjoefriek%2FSimr.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkompjoefriek%2FSimr?ref=badge_shield)
 
 
 Simr is a simulation runner written in Python 3, but is backwards compatible with Python 2 (see Travis-ci build status).
