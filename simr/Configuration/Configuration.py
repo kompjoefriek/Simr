@@ -54,8 +54,8 @@ class Configuration:
 
     def parse_variables(self):
         # Parse the variables from the configuration, and fill the list with Variable objects.
-        if self.config is None:
-            raise RuntimeError('Attempting to parse empty configuration')
+        #if self.config is None:
+        #    raise RuntimeError('Attempting to parse empty configuration')
         variable_root = self.config.find('variables')
         if variable_root is not None:
             for variable_element in variable_root.findall('variable'):
@@ -75,8 +75,8 @@ class Configuration:
 
     def parse_tasks(self):
         # Parse the tasks from the configuration, and fill the list with Task objects.
-        if self.config is None:
-            raise RuntimeError('Attempting to parse empty configuration')
+        #if self.config is None:
+        #    raise RuntimeError('Attempting to parse empty configuration')
         task_root = self.config.find('tasks')
         if task_root is not None:
             for task_element in task_root.findall('task'):
