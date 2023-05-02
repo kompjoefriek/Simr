@@ -4,13 +4,13 @@ name: UnitTests and CodeCoverage
 on: [push, pull_request]
 
 jobs:
-  test:
-    name: ${{ matrix.os }} / ${{ matrix.python_version }}
+  build:
+    name: ${{ matrix.os }} / ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}-latest
     strategy:
       matrix:
         os: [Ubuntu, Windows, macOS]
-        python-version: ["2.7", "3.9", "3.10", "3.11"]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
     env:
       OS: ${{ matrix.os }}
       PYTHON: ${{ matrix.python-version }}
