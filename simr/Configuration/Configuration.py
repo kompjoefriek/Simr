@@ -36,16 +36,16 @@ class Configuration:
         self.variables = []
 
         # Add custom date variable
-        dateVariable = {
+        date_variable = {
             "name": "DATE",
             "value": time.strftime("%Y%m%d"),
         }
-        self.variables.append(Variable(**dateVariable))
-        timeVariable = {
+        self.variables.append(Variable(**date_variable))
+        time_variable = {
             "name": "TIME",
             "value": time.strftime("%H%M%S"),
         }
-        self.variables.append(Variable(**timeVariable))
+        self.variables.append(Variable(**time_variable))
 
         self.parse_variables()
         # parse tasks
@@ -54,8 +54,6 @@ class Configuration:
 
     def parse_variables(self):
         # Parse the variables from the configuration, and fill the list with Variable objects.
-        #if self.config is None:
-        #    raise RuntimeError('Attempting to parse empty configuration')
         variable_root = self.config.find('variables')
         if variable_root is not None:
             for variable_element in variable_root.findall('variable'):
@@ -75,8 +73,6 @@ class Configuration:
 
     def parse_tasks(self):
         # Parse the tasks from the configuration, and fill the list with Task objects.
-        #if self.config is None:
-        #    raise RuntimeError('Attempting to parse empty configuration')
         task_root = self.config.find('tasks')
         if task_root is not None:
             for task_element in task_root.findall('task'):

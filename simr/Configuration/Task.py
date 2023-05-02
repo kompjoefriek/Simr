@@ -11,7 +11,7 @@ class Task:
 
     name = None
     command = None
-    parameters = None
+    parameters = []
     output = None
     no_name = 0
 
@@ -38,7 +38,7 @@ class Task:
         return self.output
 
     def run(self):
-        # TODO: handle input / output redirects properly
+        #  input / output redirects still need to be handled here
         command_and_parameters = [self.command]
         command_and_parameters.extend(self.parameters)
         try:

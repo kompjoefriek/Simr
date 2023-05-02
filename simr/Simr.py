@@ -85,7 +85,6 @@ class Simr:
                 self.max_workers -= 1
                 if self.max_workers < 0:
                     self.max_workers = 0
-                pass
 
             counter += 1
 
