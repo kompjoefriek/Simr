@@ -33,7 +33,7 @@ def test_invalid_xml():
 
 # check variables
 
-def checkDefaultVariables(variables):
+def check_default_variables(variables):
     index = 0
     assert variables[index].name == "DATE"
     index += 1
@@ -46,21 +46,21 @@ def test_non_simr_config():
     c = Configuration("tests/config/lorum.ipsum.xml")
     # should this continue to parse without a valid root tag?
     variables = c.get_variables()
-    index = checkDefaultVariables(variables)
+    check_default_variables(variables)
 
 
 def test_no_variables():
     c = Configuration("tests/config/main_echo.xml")
     variables = c.get_variables()
-    index = checkDefaultVariables(variables)
+    check_default_variables(variables)
 
 
 def test_variables_simple_config():
     c = Configuration("tests/config/variables_simple_config.xml")
     variables = c.get_variables()
-    index = checkDefaultVariables(variables)
-    #<variable name="MY_PATH" value="C:\My\Folder\Client_v%MY_VERSION%.jar;C:\My\Folder\Server_v%MY_VERSION%.jar" />
-    #<variable name="MY_VERSION" value="1.2.3" />
+    index = check_default_variables(variables)
+    # <variable name="MY_PATH" value="C:\My\Folder\Client_v%MY_VERSION%.jar;C:\My\Folder\Server_v%MY_VERSION%.jar" />
+    # <variable name="MY_VERSION" value="1.2.3" />
     assert variables[index].name == "MY_PATH"
     assert variables[index].value == "C:\\My\\Folder\\Client_v1.2.3.jar;C:\\My\\Folder\\Server_v1.2.3.jar"
     index += 1
@@ -72,14 +72,14 @@ def test_variables_simple_config():
 def test_variables_complex_config():
     c = Configuration("tests/config/variables_complex_config.xml")
     variables = c.get_variables()
-    index = checkDefaultVariables(variables)
-    #<variable name="JAVA" value="'C:\Program Files\Java\jre1.8.0_101\bin\java'" />
-    #<variable name="TEST_VERSION" value="1.2.3" />
-    #<variable name="TEST_PATH" value="C:\My_SDK" />
-    #<variable name="CODE_PATH" value="C:\CodeBase" />
-    #<variable name="SERVER_PATH" value="%CODE_PATH%\Stuff\MyServer" />
-    #<variable name="OUTPUT_PATH" value="C:\Output" />
-    #<variable name="CLASSPATH" value="%TEST_PATH%\mysdk\server\server_mysdk_%TEST_VERSION%.jar;%SERVER_PATH%\bin;%CODE_PATH%\bin;%CODE_PATH%\other\bin" />
+    index = check_default_variables(variables)
+    # <variable name="JAVA" value="'C:\Program Files\Java\jre1.8.0_101\bin\java'" />
+    # <variable name="TEST_VERSION" value="1.2.3" />
+    # <variable name="TEST_PATH" value="C:\My_SDK" />
+    # <variable name="CODE_PATH" value="C:\CodeBase" />
+    # <variable name="SERVER_PATH" value="%CODE_PATH%\Stuff\MyServer" />
+    # <variable name="OUTPUT_PATH" value="C:\Output" />
+    # <variable name="CLASSPATH" value="%TEST_PATH%\mysdk\server\server_mysdk_%TEST_VERSION%.jar;%SERVER_PATH%\bin;%CODE_PATH%\bin;%CODE_PATH%\other\bin" />
     assert variables[index].name == "JAVA"
     assert variables[index].value == "'C:\\Program Files\\Java\\jre1.8.0_101\\bin\\java'"
     index += 1
@@ -106,10 +106,10 @@ def test_variables_complex_config():
 def test_variables_date_config():
     c = Configuration("tests/config/variables_date_config.xml")
     variables = c.get_variables()
-    index = checkDefaultVariables(variables)
-    #<variable name="MY_PATH_A" value="C:\My\Folder\Client_v%MY_VERSION%.jar;C:\My\Folder\%DATE%\Server_v%MY_VERSION%.jar" />
-    #<variable name="MY_PATH_B" value="C:\My\Folder\Client_v%MY_VERSION%.jar;C:\My\Folder\%TIME%\Server_v%MY_VERSION%.jar" />
-    #<variable name="MY_VERSION" value="1.2.3" />
+    check_default_variables(variables)
+    # <variable name="MY_PATH_A" value="C:\My\Folder\Client_v%MY_VERSION%.jar;C:\My\Folder\%DATE%\Server_v%MY_VERSION%.jar" />
+    # <variable name="MY_PATH_B" value="C:\My\Folder\Client_v%MY_VERSION%.jar;C:\My\Folder\%TIME%\Server_v%MY_VERSION%.jar" />
+    # <variable name="MY_VERSION" value="1.2.3" />
 
 
 # check tasks
@@ -117,13 +117,13 @@ def test_variables_date_config():
 def test_task_with_input():
     c = Configuration("tests/config/task_with_input.xml")
     tasks = c.get_tasks()
-    #<task>
+    # <task>
     #    <command><![CDATA[echo "Hello, input"]]></command>
     #    <input>
     #        <!-- optional, for example when certain input parameters are needed for the command that need to be escaped? -->
     #        <parameter name="key" value="value" />
     #    </input>
-    #</task>
+    # </task>
     assert len(tasks) == 1
     assert tasks[0].command == "echo"
     # i don't understand why input overrides the parameters
@@ -134,13 +134,13 @@ def test_task_with_input():
 def test_task_with_output():
     c = Configuration("tests/config/task_with_output.xml")
     tasks = c.get_tasks()
-    #<task>
+    # <task>
     #    <command><![CDATA[echo "Hello, output"]]></command>
     #    <output>
     #        <!-- optional redirect for output: log, stdout, etc. -->
     #        <redirect target="stdout" />
     #    </output>
-    #</task>
+    # </task>
     assert len(tasks) == 1
     assert tasks[0].command == "echo"
     assert len(tasks[0].parameters) == 1

@@ -37,7 +37,3 @@ def test_main_echo():
 def test_main_maxworkers_echo():
     sys.argv = [STARTING_FILE, "-m", "1", "tests/config/main_echo.xml"]
     main()
-
-#def test_main_interactive_echo():
-#    sys.argv = [STARTING_FILE, "-i", "tests/config/main_echo.xml"]
-#    main()

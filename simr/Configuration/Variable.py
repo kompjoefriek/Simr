@@ -34,9 +34,8 @@ class Variable:
                                      .format(name, value.count('%')))
             else:
                 matches = re.findall(r"%([^%]+)%", value)
-                if matches is not None:
-                    # remove duplicates and store
-                    return list(set(matches))
+                # remove duplicates and store
+                return list(set(matches))
         return None
 
     @staticmethod
@@ -61,22 +60,29 @@ class Variable:
         # add this class to the call chain to prevent it from being called again this loop
         call_chain.append(self.name)
 
-        # make copy so we can alter the original inside the loop
-        depends_name_copy = self.depends_name
-
-        if self.value is not None and depends_name_copy is not None:
-            for dep_name in depends_name_copy:
-                for variable in variables:
-                    if dep_name == variable.name and len(variable.depends_name) == 0:
-                        self.value = self.value.replace("%{}%".format(variable.name), variable.value)
-                        self.depends_name.remove(dep_name)
+        if self.value is not None and self.depends_name is not None:
+            self.__resolve_own_value(variables)
 
         # if this variable is completely resolved, call all others that depend on this value
         if self.depends_name is not None and len(self.depends_name) == 0:
-            call_chain.remove(self.name)
-            for reference in self.depends_ref:
-                reference.resolve(variables, call_chain)
-                # self.depends_ref.clear()
+            self.__resolve_others(variables, call_chain)
+
+    def __resolve_own_value(self, variables):
+        # make copy so we can alter the original inside the loop
+        depends_name_copy = self.depends_name
+
+        # walk over each dependency and variable combination
+        for dep_name in depends_name_copy:
+            for variable in variables:
+                # resolve each variable whithout any dependencies left
+                if dep_name == variable.name and len(variable.depends_name) == 0:
+                    self.value = self.value.replace("%{}%".format(variable.name), variable.value)
+                    self.depends_name.remove(dep_name)
+
+    def __resolve_others(self, variables, call_chain):
+        call_chain.remove(self.name)
+        for reference in self.depends_ref:
+            reference.resolve(variables, call_chain)
 
     def __repr__(self):
         return "Variable {{\n  name:\"{}\",\n  value\"{}\",\n  depends_name: {},\n  refs: [{}]\n}}" \
